@@ -1,0 +1,103 @@
+STDOUT:
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-9.1.1, pluggy-1.6.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ABI\.gemini\antigravity\scratch\skylark-intelligence
+plugins: anyio-4.9.0, langsmith-0.4.33
+collecting ... collected 44 items
+
+tests/test_agent.py::test_simple_pipeline_question PASSED
+tests/test_agent.py::test_weighted_pipeline_question PASSED
+tests/test_agent.py::test_sector_filtering PASSED
+tests/test_agent.py::test_stage_filtering PASSED
+tests/test_agent.py::test_closing_soon_question PASSED
+tests/test_agent.py::test_work_order_question PASSED
+tests/test_agent.py::test_receivables_question PASSED
+tests/test_agent.py::test_cross_board_question PASSED
+tests/test_agent.py::test_missing_financial_values_caveat PASSED
+tests/test_agent.py::test_tool_failure_handling PASSED
+tests/test_agent.py::test_empty_dataset_handling PASSED
+tests/test_agent.py::test_invalid_user_query PASSED
+tests/test_agent.py::test_follow_up_conversational_context PASSED
+tests/test_agent.py::test_clarification_behavior PASSED
+tests/test_agent.py::test_no_fabricated_tool_results PASSED
+tests/test_agent.py::test_read_only_tool_restrictions PASSED
+tests/test_analytics.py::test_pipeline_open_and_weighted_calculations PASSED
+tests/test_analytics.py::test_pipeline_sector_and_stage_breakdowns PASSED
+tests/test_analytics.py::test_work_orders_financial_totals_and_health PASSED
+tests/test_analytics.py::test_dynamic_reference_date_injection PASSED
+tests/test_analytics.py::test_executive_kpi_service PASSED
+tests/test_analytics.py::test_founder_insights_engine PASSED
+tests/test_analytics.py::test_empty_dataset_handling PASSED
+tests/test_analytics.py::test_analytics_service_facade PASSED
+tests/test_gemini_provider.py::test_gemini_provider_missing_key PASSED
+tests/test_gemini_provider.py::test_gemini_provider_success FAILED
+tests/test_gemini_provider.py::test_gemini_provider_quota_error FAILED
+tests/test_monday_client.py::test_readonly_query_enforcement PASSED
+tests/test_monday_client.py::test_readonly_valid_queries PASSED
+tests/test_monday_client.py::test_missing_credentials_raise_config_error FAILED
+tests/test_monday_client.py::test_schema_mappings PASSED
+tests/test_monday_client.py::test_connection_validation_without_env PASSED
+tests/test_normalization.py::test_missing_values_preserved_as_null PASSED
+tests/test_normalization.py::test_zero_vs_null_distinction PASSED
+tests/test_normalization.py::test_missing_probability_preserved PASSED
+tests/test_normalization.py::test_date_normalization PASSED
+tests/test_normalization.py::test_monetary_formatting_and_malformed_values PASSED
+tests/test_normalization.py::test_duplicate_and_pk_preservation PASSED
+tests/test_normalization.py::test_cross_board_join_safety_aggregation PASSED
+tests/test_normalization.py::test_join_classification_unique_name_match PASSED
+tests/test_normalization.py::test_join_classification_duplicate_name_match PASSED
+tests/test_normalization.py::test_join_classification_unmatched_name PASSED
+tests/test_normalization.py::test_data_quality_engine PASSED
+tests/test_ui_kpi_keys.py::test_executive_kpi_keys_present PASSED
+
+================================== FAILURES ===================================
+________________________ test_gemini_provider_success _________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000287BDABDE00>
+
+    def test_gemini_provider_success(monkeypatch):
+        # Set a dummy API key
+        monkeypatch.setenv("GEMINI_API_KEY", "dummy-key")
+        # Mock the google.generativeai module and its classes
+        mock_genai = types.SimpleNamespace()
+        mock_model = mock.Mock()
+        # Mock generate_content to return an object with text attribute
+        mock_response = types.SimpleNamespace(text="Hello from Gemini", candidates=[types.SimpleNamespace(content=types.SimpleNamespace(parts=[]))])
+        mock_model.generate_content.return_value = mock_response
+>       mock_genai.GenerativeModel.return_value = mock_model
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'GenerativeModel'
+
+tests\test_gemini_provider.py:28: AttributeError
+______________________ test_gemini_provider_quota_error _______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000287BDB7F770>
+
+    def test_gemini_provider_quota_error(monkeypatch):
+        monkeypatch.setenv("GEMINI_API_KEY", "dummy-key")
+        mock_genai = types.SimpleNamespace()
+        mock_model = mock.Mock()
+        mock_model.generate_content.side_effect = Exception("Quota exceeded")
+>       mock_genai.GenerativeModel.return_value = mock_model
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'GenerativeModel'
+
+tests\test_gemini_provider.py:44: AttributeError
+_________________ test_missing_credentials_raise_config_error _________________
+
+    def test_missing_credentials_raise_config_error():
+        """Verify that client raises MondayConfigError when API token is empty."""
+        client = MondayClient(api_token="")
+>       with pytest.raises(MondayConfigError) as exc_info:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE MondayConfigError
+
+tests\test_monday_client.py:32: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_gemini_provider.py::test_gemini_provider_success - AttributeError: 'types.SimpleNamespace' object has no attribute 'GenerativeModel'
+FAILED tests/test_gemini_provider.py::test_gemini_provider_quota_error - AttributeError: 'types.SimpleNamespace' object has no attribute 'GenerativeModel'
+FAILED tests/test_monday_client.py::test_missing_credentials_raise_config_error - Failed: DID NOT RAISE MondayConfigError
+======================== 3 failed, 41 passed in 8.78s =========================
+
+STDERR:

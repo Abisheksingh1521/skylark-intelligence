@@ -1,0 +1,42 @@
+STDOUT:
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-9.1.1, pluggy-1.6.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ABI\.gemini\antigravity\scratch\skylark-intelligence
+plugins: anyio-4.9.0, langsmith-0.4.33
+collecting ... collected 41 items / 1 error
+
+=================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_gemini_provider.py ________________
+..\..\..\..\AppData\Roaming\Python\Python313\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+..\..\..\..\AppData\Roaming\Python\Python313\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+..\..\..\..\AppData\Roaming\Python\Python313\site-packages\_pytest\assertion\rewrite.py:179: in exec_module
+    source_stat, co = _rewrite_test(fn, self.config)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Roaming\Python\Python313\site-packages\_pytest\assertion\rewrite.py:348: in _rewrite_test
+    tree = ast.parse(source, filename=strfn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\ast.py:50: in parse
+    return compile(source, filename, mode, flags,
+E     File "C:\Users\ABI\.gemini\antigravity\scratch\skylark-intelligence\tests\test_gemini_provider.py", line 31
+E       mock_genai.configure = mock.Mock()
+E   IndentationError: unexpected indent
+=========================== short test summary info ===========================
+ERROR tests/test_gemini_provider.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+============================== 1 error in 2.13s ===============================
+
+STDERR:

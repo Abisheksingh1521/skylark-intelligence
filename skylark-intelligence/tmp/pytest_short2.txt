@@ -1,0 +1,66 @@
+STDOUT:
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-9.1.1, pluggy-1.6.0 -- C:\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ABI\.gemini\antigravity\scratch\skylark-intelligence
+plugins: anyio-4.9.0, langsmith-0.4.33
+collecting ... collected 44 items
+
+tests/test_agent.py::test_simple_pipeline_question PASSED
+tests/test_agent.py::test_weighted_pipeline_question PASSED
+tests/test_agent.py::test_sector_filtering PASSED
+tests/test_agent.py::test_stage_filtering PASSED
+tests/test_agent.py::test_closing_soon_question PASSED
+tests/test_agent.py::test_work_order_question PASSED
+tests/test_agent.py::test_receivables_question PASSED
+tests/test_agent.py::test_cross_board_question PASSED
+tests/test_agent.py::test_missing_financial_values_caveat PASSED
+tests/test_agent.py::test_tool_failure_handling PASSED
+tests/test_agent.py::test_empty_dataset_handling PASSED
+tests/test_agent.py::test_invalid_user_query PASSED
+tests/test_agent.py::test_follow_up_conversational_context PASSED
+tests/test_agent.py::test_clarification_behavior PASSED
+tests/test_agent.py::test_no_fabricated_tool_results PASSED
+tests/test_agent.py::test_read_only_tool_restrictions PASSED
+tests/test_analytics.py::test_pipeline_open_and_weighted_calculations PASSED
+tests/test_analytics.py::test_pipeline_sector_and_stage_breakdowns PASSED
+tests/test_analytics.py::test_work_orders_financial_totals_and_health PASSED
+tests/test_analytics.py::test_dynamic_reference_date_injection PASSED
+tests/test_analytics.py::test_executive_kpi_service PASSED
+tests/test_analytics.py::test_founder_insights_engine PASSED
+tests/test_analytics.py::test_empty_dataset_handling PASSED
+tests/test_analytics.py::test_analytics_service_facade PASSED
+tests/test_gemini_provider.py::test_gemini_provider_missing_key PASSED
+tests/test_gemini_provider.py::test_gemini_provider_success PASSED
+tests/test_gemini_provider.py::test_gemini_provider_quota_error PASSED
+tests/test_monday_client.py::test_readonly_query_enforcement PASSED
+tests/test_monday_client.py::test_readonly_valid_queries PASSED
+tests/test_monday_client.py::test_missing_credentials_raise_config_error FAILED
+tests/test_monday_client.py::test_schema_mappings PASSED
+tests/test_monday_client.py::test_connection_validation_without_env PASSED
+tests/test_normalization.py::test_missing_values_preserved_as_null PASSED
+tests/test_normalization.py::test_zero_vs_null_distinction PASSED
+tests/test_normalization.py::test_missing_probability_preserved PASSED
+tests/test_normalization.py::test_date_normalization PASSED
+tests/test_normalization.py::test_monetary_formatting_and_malformed_values PASSED
+tests/test_normalization.py::test_duplicate_and_pk_preservation PASSED
+tests/test_normalization.py::test_cross_board_join_safety_aggregation PASSED
+tests/test_normalization.py::test_join_classification_unique_name_match PASSED
+tests/test_normalization.py::test_join_classification_duplicate_name_match PASSED
+tests/test_normalization.py::test_join_classification_unmatched_name PASSED
+tests/test_normalization.py::test_data_quality_engine PASSED
+tests/test_ui_kpi_keys.py::test_executive_kpi_keys_present PASSED
+
+================================== FAILURES ===================================
+_________________ test_missing_credentials_raise_config_error _________________
+tests\test_monday_client.py:31: in test_missing_credentials_raise_config_error
+    client = MondayClient(api_token="")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+monday\client.py:36: in __init__
+    raise MondayConfigError("MONDAY_API_TOKEN is not configured in environment variables.")
+E   monday.client.MondayConfigError: MONDAY_API_TOKEN is not configured in environment variables.
+=========================== short test summary info ===========================
+FAILED tests/test_monday_client.py::test_missing_credentials_raise_config_error - monday.client.MondayConfigError: MONDAY_API_TOKEN is not configured in environment variables.
+======================== 1 failed, 43 passed in 5.23s =========================
+
+STDERR:
